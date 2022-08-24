@@ -132,14 +132,8 @@ module.exports = {
   |
   */
   csrf: {
-    enable: true,
+    enable: false,
     methods: ['POST', 'PUT', 'DELETE'],
     filterUris: [],
-    cookieOptions: {
-      httpOnly: false,
-      sameSite: true,
-      path: '/',
-      maxAge: 7200
-    }
   }
 }
