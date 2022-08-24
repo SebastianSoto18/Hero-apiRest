@@ -14,12 +14,13 @@ class HeroController {
 
   async store ({request}) {
     const {name, alias, age} = request.all();
-    console.log(name, alias, age);
     const hero = await  Hero.create({name,alias,age});
     return hero;
   }
 
-  async show ({ params, request, response, view }) {
+  async show () {
+    const heroes = await Hero.all();
+    return heroes;
   }
 
   async update ({ params, request, response }) {
