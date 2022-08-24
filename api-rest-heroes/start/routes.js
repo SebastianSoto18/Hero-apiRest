@@ -21,5 +21,6 @@ const Route = use('Route');
     Route.get('show', 'HeroController.show');
     Route.get('show/:id', 'HeroController.showById');
     Route.put('update/:id', 'HeroController.update');
+    Route.put('update/alias-age/:id', 'HeroController.updateAliasAndAge');
   }).prefix('heroes')
   
