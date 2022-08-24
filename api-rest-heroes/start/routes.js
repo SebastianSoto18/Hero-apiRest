@@ -20,5 +20,6 @@ const Route = use('Route');
     Route.post('registrer', 'HeroController.store');
     Route.get('show', 'HeroController.show');
     Route.get('show/:id', 'HeroController.showById');
+    Route.put('update/:id', 'HeroController.update');
   }).prefix('heroes')
   
