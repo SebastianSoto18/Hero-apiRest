@@ -23,6 +23,11 @@ class HeroController {
     return heroes;
   }
 
+  async showById ({ params }) {
+    const hero = await Hero.find(params.id);
+    return hero;
+  }
+
   async update ({ params, request, response }) {
   }
 
