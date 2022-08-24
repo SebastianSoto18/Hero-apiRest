@@ -28,7 +28,12 @@ class HeroController {
     return hero;
   }
 
-  async update ({ params, request, response }) {
+  async update ({request, params}) {
+    const {name, alias, age} = request.all();
+    const hero = await Hero.find(params.id);
+    hero.merge({name, alias, age});
+    await hero.save();
+    return hero;
   }
 
   async destroy ({ params, request, response }) {
