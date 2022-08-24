@@ -14,15 +14,10 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
-
-
-
-Route.get('/', () => {
-    return { greeting: 'Hello world in messagessssss' }
-  })
+const Route = use('Route');
   
   Route.group(() => {
     Route.post('registrer', 'HeroController.store');
+    Route.get('show', 'HeroController.show');
   }).prefix('heroes')
   
