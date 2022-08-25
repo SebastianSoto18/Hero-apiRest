@@ -45,9 +45,17 @@ class HeroController {
   }
 
   async destroy ({ params }) {
-    const hero = await Hero.find(params.id);
-    await hero.delete();
-    return {message: 'Hero deleted'};
+    let message ="";
+    
+    try {
+      const hero = await Hero.find(params.id);
+      await hero.delete();
+      message = 'Hero deleted';
+    } catch (error) {
+      message = 'Fail to delete hero: ' + error;
+    }
+
+    return message;
   }
 }
 
