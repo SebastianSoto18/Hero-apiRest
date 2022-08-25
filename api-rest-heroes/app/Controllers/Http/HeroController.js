@@ -36,6 +36,14 @@ class HeroController {
     return hero;
   }
 
+  async updateAliasAndAge ({params, request}) {
+    const hero = await Hero.find(params.id);
+    const {alias, age} = request.all();
+    hero.merge({alias: alias, age: age});
+    await hero.save();
+    return hero;
+  }
+
   async destroy ({ params, request, response }) {
   }
 }
