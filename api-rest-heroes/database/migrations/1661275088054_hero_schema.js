@@ -10,6 +10,7 @@ class HeroSchema extends Schema {
       table.string('name', 80).notNullable().unique()
       table.string('alias', 80).notNullable().unique()
       table.integer('age', 60).notNullable()
+      table.integer('DI', 60).notNullable().unique()
       table.timestamps()
     })
   }

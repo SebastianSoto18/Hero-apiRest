@@ -26,7 +26,7 @@ class Hero extends Model {
     }
 
     static get visible(){
-        return ['id', 'name', 'alias', 'age', 'created_at', 'updated_at'];
+        return ['id', 'name', 'alias', 'age','DI','created_at', 'updated_at'];
     }
 
 }
