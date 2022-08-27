@@ -13,9 +13,13 @@ const Hero = use('App/Models/Hero');
 class HeroController {
 
   async store ({request}) {
-    const {name, alias, age} = request.all();
-    const hero = await  Hero.create({name,alias,age});
-    return hero;
+    const {name, alias, age,DI} = request.all();
+    try {
+      const hero = await  Hero.create({name,alias,age,DI});
+      return hero;
+    } catch (error) {
+      return "Failed to create hero\n"+error;
+    }
   }
 
   async show () {
