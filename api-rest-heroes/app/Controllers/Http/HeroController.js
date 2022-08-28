@@ -30,7 +30,7 @@ class HeroController {
     }
   }
 
-  async showByDi({ params }) {
+  async showById({ params }) {
     const hero = await Hero.find(params.id);
     if (hero != null) {
       return hero;
@@ -40,10 +40,10 @@ class HeroController {
   }
 
   async update({ request, params }) {
-    const { name, alias, age } = request.all();
-    const hero = await Hero.findBy("Di", params.Di);
+    const { name, alias, age, Di } = request.all();
+    const hero = await Hero.find(params.id);
     if (hero != null) {
-      hero.merge({ name, alias, age });
+      hero.merge({ name, alias, age, Di });
       await hero.save();
       return hero;
     } else {
@@ -52,7 +52,7 @@ class HeroController {
   }
 
   async updateAliasAndAge({ params, request }) {
-    const hero = await Hero.findBy("DI", params.Di);
+    const hero = await Hero.find(params.id);
     const { alias, age } = request.all();
     if (hero != null) {
       hero.merge({ alias: alias, age: age });
@@ -65,12 +65,12 @@ class HeroController {
 
   async destroy({ params }) {
     let message = "";
-    const hero = await Hero.findBy("Di", params.Di);
+    const hero = await Hero.find(params.id);
     if (hero != null) {
       await hero.delete();
       message = "Hero deleted";
     } else {
-      message = "Fail to delete hero: " + error;
+      message = "Fail to delete hero";
     }
     return message;
   }

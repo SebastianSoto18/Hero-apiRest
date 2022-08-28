@@ -19,9 +19,9 @@ const Route = use('Route');
   Route.group(() => {
     Route.post('registrer', 'HeroController.store');
     Route.get('show', 'HeroController.show');
-    Route.get('show/:id', 'HeroController.showByDi');
-    Route.put('update/:Di', 'HeroController.update');
-    Route.put('update/alias-age/:Di', 'HeroController.updateAliasAndAge');
-    Route.delete('delete/:Di', 'HeroController.destroy');
+    Route.get('show/:id', 'HeroController.showById');
+    Route.put('update/:id', 'HeroController.update');
+    Route.put('update/alias-age/:id', 'HeroController.updateAliasAndAge');
+    Route.delete('delete/:id', 'HeroController.destroy');
   }).prefix('heroes')
   
