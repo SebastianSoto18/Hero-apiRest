@@ -11,66 +11,84 @@
 const Hero = use('App/Models/Hero');
 
 class HeroController {
-  async store ({ request }) {
+  async store ({ request,response }) {
     const { name, alias, age,DI} = request.all();
     try {
       const hero = await  Hero.create({name,alias,age,DI});
-      return hero;
+      response.status(200).send({
+        message: "Hero created successfully",
+        hero
+      })
     } catch (error) {
-      return "Failed to create hero\n"+error;
+      response.status(400).send({
+        message: "Error creating hero",
+        error
+      })
     }
   }
 
-  async show () {
+  async show ({ response }) {
     const heroes = await Hero.all();
     if (heroes.rows.length != 0) {
-      return heroes;
+      response.status(200).send({
+        heroes
+      });
     } else {
-      return "No heroes found";
+      response.status(404).send({ message: "Heros Database empty" });
     }
   }
 
-  async showById ({ params }) {
+  async showById ({ params,response }) {
     const hero = await Hero.find(params.id);
     if (hero != null) {
-      return hero;
+        response.status(200).send({
+          hero
+        });
     } else {
-      return "Hero not found";
+      response.status(404).send({ message: "Hero not found" });
     }
   }
 
-  async update ({request, params}) {
+  async update ({request, params,response}) {
     const {name, alias, age, Di } = request.all();
     const hero = await Hero.find(params.id);
     if (hero != null) {
       hero.merge({ name, alias, age, Di });
       await hero.save();
-      return hero;
+      response.status(200).send({
+        message: "Hero updated successfully",
+        hero
+      });
     } else {
-      return "Hero not found";
+      response.status(404).send({ message: "Hero not found" });
     }
   }
 
-  async updateAliasAndAge ({params, request}) {
+  async updateAliasAndAge ({params, request,response}) {
     const hero = await Hero.find(params.id);
     const { alias, age } = request.all();
     if (hero != null) {
       hero.merge({ alias: alias, age: age });
       await hero.save();
-      return hero;
+      response.status(200).send({
+        message: "Hero updated successfully",
+        hero
+      });
     } else {
-      return "Hero not found";
+      response.status(404).send({ message: "Hero not found" });
     }
   }
 
-  async destroy ({ params }) {
+  async destroy ({ params,response }) {
     let message = "";
     const hero = await Hero.find(params.id);
     if (hero != null) {
       await hero.delete();
-      message = 'Hero deleted';
+      response.status(200).send({
+        message: "Hero deleted successfully"
+      });
     } else {
-      message = 'Fail to delete hero';
+      response.status(404).send({message: "Hero not found"});
     }
     
     return message;
