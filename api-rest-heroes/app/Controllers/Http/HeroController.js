@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -23,7 +23,6 @@ class HeroController {
 
   async show() {
     const heroes = await Hero.all();
-
     if (heroes.rows.length != 0) {
       return heroes;
     } else {
@@ -32,8 +31,7 @@ class HeroController {
   }
 
   async showByDi({ params }) {
-    const hero = await Hero.findBy("Di", params.Di);
-
+    const hero = await Hero.find(params.id);
     if (hero != null) {
       return hero;
     } else {
@@ -44,7 +42,6 @@ class HeroController {
   async update({ request, params }) {
     const { name, alias, age } = request.all();
     const hero = await Hero.findBy("Di", params.Di);
-
     if (hero != null) {
       hero.merge({ name, alias, age });
       await hero.save();
@@ -57,7 +54,6 @@ class HeroController {
   async updateAliasAndAge({ params, request }) {
     const hero = await Hero.findBy("DI", params.Di);
     const { alias, age } = request.all();
-
     if (hero != null) {
       hero.merge({ alias: alias, age: age });
       await hero.save();
@@ -69,16 +65,13 @@ class HeroController {
 
   async destroy({ params }) {
     let message = "";
-
     const hero = await Hero.findBy("Di", params.Di);
-
     if (hero != null) {
       await hero.delete();
       message = "Hero deleted";
     } else {
       message = "Fail to delete hero: " + error;
     }
-
     return message;
   }
 }

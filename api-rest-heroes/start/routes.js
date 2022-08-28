@@ -19,7 +19,7 @@ const Route = use('Route');
   Route.group(() => {
     Route.post('registrer', 'HeroController.store');
     Route.get('show', 'HeroController.show');
-    Route.get('show/:Di', 'HeroController.showByDi');
+    Route.get('show/:id', 'HeroController.showByDi');
     Route.put('update/:Di', 'HeroController.update');
     Route.put('update/alias-age/:Di', 'HeroController.updateAliasAndAge');
     Route.delete('delete/:Di', 'HeroController.destroy');
